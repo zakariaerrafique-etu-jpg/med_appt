@@ -6,30 +6,32 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    fetch("https://api.stayhealthy/login", {
+  const handleLogin = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("http://localhost:3000/api/auth/login", {
       method: "POST",
-      body: JSON.stringify({ email, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
     });
-  };
-  
-  localStorage.setItem(
-  "user",
-  JSON.stringify({
-    email: formData.email
-  })
-);
 
-navigate("/");
+    const data = await response.json();
 
-  return (
-    <div>
-      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" onChange={(e) => setPassword(e.target.value)} />
-      <button onClick={handleLogin}>Login</button>
-    </div>
-  );
-}
-
-export default Login;
+    if (response.ok) {
+      console.log("Login successful", data);
+      // enregistrer le token si nécessaire
+      // rediriger l'utilisateur
+    } else {
+      console.error(data.message);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
