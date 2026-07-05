@@ -1,16 +1,19 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Notification from "./components/Notification";
-
+  
 function App() {
   return (
     <>
-      <Navbar />
       <Notification />
-      <h1>StayHealthy Platform</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/appointments" element={<Appointments />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Sign_Up />} />
+      </Routes>
     </>
   );
 }
-
 export default App;
 
