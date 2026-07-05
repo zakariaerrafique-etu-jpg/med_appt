@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-
+app.use("/api/auth", authRoutes);
 
 function Login() {
   const [email, setEmail] = useState("");
