@@ -14,6 +14,20 @@ function DoctorCard({ doctor, onCancel }) {
     </div>
   );
 }
+const [appointments, setAppointments] = useState(
+  JSON.parse(localStorage.getItem("appointments")) || []
+);
 
-export default DoctorCard;
+const handleCancelAppointment = (id) => {
+  const updatedAppointments = appointments.filter(
+    (appointment) => appointment.id !== id
+  );
+
+  setAppointments(updatedAppointments);
+  localStorage.setItem(
+    "appointments",
+    JSON.stringify(updatedAppointments)
+  );
+};  
+export default DoctorCard; 
 
